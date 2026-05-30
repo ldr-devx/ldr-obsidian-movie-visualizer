@@ -1,4 +1,5 @@
-# LDR | Movie Visualizer
+![](https://capsule-render.vercel.app/api?type=waving&text=LDR%20|%20Movie%20Visualizer&fontColor=CCA9DD)
+
 
 A visual movie catalog plugin for [Obsidian](https://obsidian.md). Turn your movie notes into a full-featured cinema dashboard — with hero banners, carousels, top lists, director stats, tier lists, and more.
 
@@ -6,7 +7,13 @@ A visual movie catalog plugin for [Obsidian](https://obsidian.md). Turn your mov
 
 ---
 
-## Screenshots
+![Main Preview](docs/IMAGENPRINCIPAL.png)
+
+<video src="docs/preview.mp4" controls width="100%"></video>
+
+---
+
+## Views
 
 ### Dashboard
 ![Dashboard](docs/dashboard.png)

@@ -9,7 +9,7 @@ A visual movie catalog plugin for [Obsidian](https://obsidian.md). Turn your mov
 
 ![Main Preview](docs/IMAGENPRINCIPAL.png)
 
-<video src="docs/preview.mp4" controls width="100%"></video>
+<video src="https://github.com/user-attachments/assets/da89b3f2-a71b-4612-bc26-6835912278be" controls width="100%"></video>
 
 ---
 

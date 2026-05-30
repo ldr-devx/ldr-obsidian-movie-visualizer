@@ -1,0 +1,10 @@
+{
+  "id": "ldr-obsidian-movie-visualizer",
+  "name": "LDR | Movie Visualizer",
+  "version": "0.1.0",
+  "minAppVersion": "1.4.0",
+  "description": "Visual movie catalog with dashboard, top lists, filters, reviews, director stats, tier lists and more.",
+  "author": "LDR_Dev",
+  "authorUrl": "https://github.com/ldr-devx",
+  "isDesktopOnly": false
+}

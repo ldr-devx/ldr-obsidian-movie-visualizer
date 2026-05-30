@@ -1,0 +1,90 @@
+[
+  {
+    "schemaVersion": "0.1.0",
+    "name": "IMDb Movie",
+    "behavior": "create",
+    "noteContentFormat": "",
+    "properties": [
+      {
+        "name": "title",
+        "value": "{{title}}",
+        "type": "text"
+      },
+      {
+        "name": "titleOriginal",
+        "value": "{{title}}",
+        "type": "text"
+      },
+      {
+        "name": "imdbId",
+        "value": "{{url | replace:\"https://www.imdb.com/title/\",\"\" | replace:\"/\",\"\"}}",
+        "type": "text"
+      },
+      {
+        "name": "year",
+        "value": "{{selector:\"span[data-testid='title-metadata-item']:first-child\" | trim}}",
+        "type": "number"
+      },
+      {
+        "name": "runtime",
+        "value": "{{selector:\"li[data-testid='title-techspec_runtime'] .ipc-metadata-list-item__content-container\" | trim}}",
+        "type": "text"
+      },
+      {
+        "name": "director",
+        "value": "{{selectorAll:\"a[href*='/name/'][data-testid='title-pc-principal-credit']\" | list}}",
+        "type": "multitext"
+      },
+      {
+        "name": "cast",
+        "value": "{{selectorAll:\".ipc-metadata-list-item__label:contains('Stars') ~ .ipc-metadata-list-item__content-container a\" | list | slice:0:5}}",
+        "type": "multitext"
+      },
+      {
+        "name": "genre",
+        "value": "{{selectorAll:\".ipc-chip--on-baseAlt .ipc-chip__text\" | list}}",
+        "type": "multitext"
+      },
+      {
+        "name": "plot",
+        "value": "{{selector:\"[data-testid='plot-xl'] span, [data-testid='plot-l'] span\" | trim}}",
+        "type": "text"
+      },
+      {
+        "name": "scoreImdb",
+        "value": "{{selector:\"[data-testid='hero-rating-bar__aggregate-rating__score'] span:first-child\" | trim}}",
+        "type": "number"
+      },
+      {
+        "name": "cover",
+        "value": "{{selector:\".ipc-image\" | attribute:\"src\"}}",
+        "type": "text"
+      },
+      {
+        "name": "favorite",
+        "value": "false",
+        "type": "checkbox"
+      },
+      {
+        "name": "timesWatched",
+        "value": "0",
+        "type": "number"
+      },
+      {
+        "name": "watchlist",
+        "value": "{{date}}",
+        "type": "date"
+      },
+      {
+        "name": "categories",
+        "value": "Movies",
+        "type": "multitext"
+      }
+    ],
+    "noteNameFormat": "{{title}}",
+    "notePath": "Movies",
+    "triggers": [
+      "imdb.com/title/"
+    ]
+  }
+]

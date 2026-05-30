@@ -1,0 +1,153 @@
+filters:
+  and:
+    - categories.contains(link("Movies"))
+    - '!file.name.contains("Template")'
+properties:
+  file.name:
+    displayName: Title
+  note.year:
+    displayName: Year
+  note.director:
+    displayName: Director
+  note.cast:
+    displayName: Cast
+  note.genre:
+    displayName: Genre
+  note.rating:
+    displayName: My Rating
+  note.scoreImdb:
+    displayName: IMDb
+  note.scoreRT:
+    displayName: RT
+  note.scoreMetacritic:
+    displayName: MC
+  note.runtime:
+    displayName: Runtime
+  note.last:
+    displayName: Last Watched
+  note.watchlist:
+    displayName: Added
+  note.favorite:
+    displayName: Fav
+  note.timesWatched:
+    displayName: Times
+  note.review:
+    displayName: Review
+views:
+  - type: table
+    name: All
+    order:
+      - file.name
+      - year
+      - director
+      - rating
+      - scoreImdb
+      - scoreRT
+      - genre
+      - last
+    sort:
+      - property: last
+        direction: DESC
+      - property: file.name
+        direction: ASC
+  - type: table
+    name: To-watch
+    filters:
+      and:
+        - last.isEmpty()
+        - rating.isEmpty()
+    order:
+      - file.name
+      - year
+      - scoreImdb
+      - scoreRT
+      - runtime
+      - watchlist
+      - director
+      - genre
+    sort:
+      - property: scoreImdb
+        direction: DESC
+      - property: scoreRT
+        direction: DESC
+      - property: watchlist
+        direction: DESC
+  - type: table
+    name: Favorites
+    filters:
+      and:
+        - note.rating > 7
+    order:
+      - file.name
+      - director
+      - year
+      - genre
+      - rating
+      - scoreImdb
+      - last
+    sort:
+      - property: rating
+        direction: DESC
+      - property: scoreImdb
+        direction: DESC
+  - type: table
+    name: Last Watched
+    filters:
+      and:
+        - "!last.isEmpty()"
+    order:
+      - file.name
+      - year
+      - rating
+      - last
+      - director
+      - genre
+    sort:
+      - property: last
+        direction: DESC
+    limit: 20
+  - type: table
+    name: By Director
+    filters:
+      and:
+        - list(director).contains(this)
+    order:
+      - file.name
+      - year
+      - rating
+      - scoreImdb
+      - last
+      - genre
+    sort:
+      - property: year
+        direction: DESC
+  - type: table
+    name: By Genre
+    filters:
+      and:
+        - list(genre).contains(this)
+    order:
+      - file.name
+      - rating
+      - year
+      - director
+      - last
+    sort:
+      - property: rating
+        direction: DESC
+      - property: scoreImdb
+        direction: DESC
+  - type: table
+    name: By Actor
+    filters:
+      and:
+        - list(cast).contains(this)
+    order:
+      - file.name
+      - year
+      - director
+      - rating
+      - scoreImdb
+    sort:
+      - property: year
+        direction: DESC

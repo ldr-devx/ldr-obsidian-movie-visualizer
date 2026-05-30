@@ -1,0 +1,23 @@
+{
+  "name": "ldr-obsidian-movie-visualizer",
+  "version": "0.1.0",
+  "description": "Visual movie catalog plugin for Obsidian",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "version": "node version-bump.mjs && git add manifest.json versions.json"
+  },
+  "keywords": ["obsidian", "movies", "catalog", "film", "cinema", "watchlist", "tier-list"],
+  "author": "LDR_Dev",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "builtin-modules": "^3.3.0",
+    "esbuild": "^0.20.0",
+    "obsidian": "latest",
+    "tslib": "^2.6.0",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {}
+}

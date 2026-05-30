@@ -62,7 +62,7 @@ export class MovieVisualizerView extends ItemView {
 	private service!: MovieDataService;
 	private currentRoute: Route = "dashboard";
 	private navEl!: HTMLElement;
-	private contentEl!: HTMLElement;
+	private viewContentEl!: HTMLElement;
 	private unsubscribe?: () => void;
 	private rankOrder: string[] = [];
 	private allOrder: string[] = [];
@@ -118,7 +118,7 @@ export class MovieVisualizerView extends ItemView {
 		this.buildNav();
 
 		// Content area
-		this.contentEl = root.createDiv("lmv-content");
+		this.viewContentEl = root.createDiv("lmv-content");
 
 		// Subscribe to data changes
 		this.unsubscribe = this.service.subscribe(() => {
@@ -175,12 +175,12 @@ export class MovieVisualizerView extends ItemView {
 		});
 
 		// Animate out → render → animate in
-		this.contentEl.classList.add("lmv-content--exit");
+		this.viewContentEl.classList.add("lmv-content--exit");
 		setTimeout(() => {
-			this.contentEl.classList.remove("lmv-content--exit");
+			this.viewContentEl.classList.remove("lmv-content--exit");
 			this.renderRoute(route, data);
-			this.contentEl.classList.add("lmv-content--enter");
-			setTimeout(() => this.contentEl.classList.remove("lmv-content--enter"), 300);
+			this.viewContentEl.classList.add("lmv-content--enter");
+			setTimeout(() => this.viewContentEl.classList.remove("lmv-content--enter"), 300);
 		}, 150);
 	}
 
@@ -212,7 +212,7 @@ export class MovieVisualizerView extends ItemView {
 
 		switch (route) {
 			case "dashboard":
-				renderDashboard(this.contentEl, {
+				renderDashboard(this.viewContentEl, {
 					service: this.service,
 					...movieHandlers,
 					onViewAll: (r) => nav(r as Route),
@@ -220,7 +220,7 @@ export class MovieVisualizerView extends ItemView {
 				break;
 
 			case "catalog":
-				new CatalogView({ service: this.service, ...movieHandlers }).render(this.contentEl);
+				new CatalogView({ service: this.service, ...movieHandlers }).render(this.viewContentEl);
 				break;
 
 			case "favorites":
@@ -228,7 +228,7 @@ export class MovieVisualizerView extends ItemView {
 					service: this.service,
 					...movieHandlers,
 					initialFilter: { genres: [], status: "favorites" },
-				}).render(this.contentEl);
+				}).render(this.viewContentEl);
 				break;
 
 			case "unwatched":
@@ -236,7 +236,7 @@ export class MovieVisualizerView extends ItemView {
 					service: this.service,
 					...movieHandlers,
 					initialFilter: { genres: [], status: "unwatched" },
-				}).render(this.contentEl);
+				}).render(this.viewContentEl);
 				break;
 
 			case "watched":
@@ -244,15 +244,15 @@ export class MovieVisualizerView extends ItemView {
 					service: this.service,
 					...movieHandlers,
 					initialFilter: { genres: [], status: "watched" },
-				}).render(this.contentEl);
+				}).render(this.viewContentEl);
 				break;
 
 			case "search":
-				renderSearch(this.contentEl, { service: this.service, ...movieHandlers });
+				renderSearch(this.viewContentEl, { service: this.service, ...movieHandlers });
 				break;
 
 			case "top":
-				renderTopList(this.contentEl, {
+				renderTopList(this.viewContentEl, {
 					service: this.service,
 					...movieHandlers,
 					customOrder: this.rankOrder,
@@ -269,27 +269,27 @@ export class MovieVisualizerView extends ItemView {
 				break;
 
 			case "directors":
-				renderDirectors(this.contentEl, { service: this.service, ...movieHandlers });
+				renderDirectors(this.viewContentEl, { service: this.service, ...movieHandlers });
 				break;
 
 			case "actors":
-				renderActors(this.contentEl, { service: this.service, ...movieHandlers });
+				renderActors(this.viewContentEl, { service: this.service, ...movieHandlers });
 				break;
 
 			case "playlists":
-				renderPlaylists(this.contentEl, { app: this.app, service: this.service, ...movieHandlers });
+				renderPlaylists(this.viewContentEl, { app: this.app, service: this.service, ...movieHandlers });
 				break;
 
 			case "reviews":
-				renderReviews(this.contentEl, { service: this.service, ...movieHandlers });
+				renderReviews(this.viewContentEl, { service: this.service, ...movieHandlers });
 				break;
 
 			case "stats":
-				renderStats(this.contentEl, this.service);
+				renderStats(this.viewContentEl, this.service);
 				break;
 
 			case "tierlist":
-				renderTierList(this.contentEl, {
+				renderTierList(this.viewContentEl, {
 					service: this.service,
 					onMovieClick: (movie) => this.openMovieDetail(movie),
 					savedData: this.tierListData,
@@ -304,7 +304,7 @@ export class MovieVisualizerView extends ItemView {
 				if (data instanceof Object && "id" in data) {
 					const movie = this.service.getById((data as Movie).id);
 					if (movie) {
-						renderMovieDetail(this.contentEl, {
+						renderMovieDetail(this.viewContentEl, {
 							movie,
 							service: this.service,
 							onBack: () => nav("catalog"),
@@ -323,10 +323,10 @@ export class MovieVisualizerView extends ItemView {
 			el.classList.remove("lmv-nav__item--active");
 		});
 
-		this.contentEl.classList.add("lmv-content--exit");
+		this.viewContentEl.classList.add("lmv-content--exit");
 		setTimeout(() => {
-			this.contentEl.classList.remove("lmv-content--exit");
-			renderMovieDetail(this.contentEl, {
+			this.viewContentEl.classList.remove("lmv-content--exit");
+			renderMovieDetail(this.viewContentEl, {
 				movie,
 				service: this.service,
 				onBack: () => this.navigateTo("catalog"),
@@ -335,8 +335,8 @@ export class MovieVisualizerView extends ItemView {
 					await this.service.updateField(m, { favorite: !m.favorite });
 				},
 			});
-			this.contentEl.classList.add("lmv-content--enter");
-			setTimeout(() => this.contentEl.classList.remove("lmv-content--enter"), 300);
+			this.viewContentEl.classList.add("lmv-content--enter");
+			setTimeout(() => this.viewContentEl.classList.remove("lmv-content--enter"), 300);
 		}, 150);
 	}
 }

@@ -158,7 +158,7 @@ function buildTimeline(title: string, entries: [string, number][]): HTMLElement 
 	const svg = document.createElementNS(svgNS, "svg");
 	svg.setAttribute("viewBox", `0 0 ${entries.length * 20} 60`);
 	svg.setAttribute("preserveAspectRatio", "none");
-	svg.className = "lmv-sparkline";
+	svg.setAttribute("class", "lmv-sparkline");
 
 	if (entries.length > 1) {
 		const points = entries.map((e, i) => {
